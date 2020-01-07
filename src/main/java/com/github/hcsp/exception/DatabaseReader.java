@@ -20,6 +20,8 @@ public class DatabaseReader {
                                 + " "
                                 + resultSet.getString(2));
             }
+        } catch (SQLException e) {
+            System.out.println("Error to connect the database:" + e);
         }
     }
 }
