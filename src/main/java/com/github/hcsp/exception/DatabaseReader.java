@@ -9,11 +9,7 @@ public class DatabaseReader {
         String jdbcUrl = "jdbc:h2:file:" + new File(projectDir, "test").getAbsolutePath();
         System.out.println(jdbcUrl);
 
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = DriverManager.getConnection(jdbcUrl, "sa", "");
-            statement = connection.prepareStatement("select * from PULL_REQUESTS where number > ?");
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, "sa", ""); PreparedStatement statement = connection.prepareStatement("select * from PULL_REQUESTS where number > ?")) {
             statement.setInt(1, 0);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -23,13 +19,6 @@ public class DatabaseReader {
                                 + resultSet.getString(2)
                                 + " "
                                 + resultSet.getString(2));
-            }
-        } finally {
-            if (connection != null) {
-                connection.close();
-            }
-            if (statement != null) {
-                statement.close();
             }
         }
     }
