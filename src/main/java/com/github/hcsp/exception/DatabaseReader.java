@@ -1,7 +1,10 @@
 package com.github.hcsp.exception;
 
 import java.io.File;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class DatabaseReader {
     public static void main(String[] args) {
@@ -9,7 +12,7 @@ public class DatabaseReader {
         String jdbcUrl = "jdbc:h2:file:" + new File(projectDir, "test").getAbsolutePath();
         System.out.println(jdbcUrl);
 
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, "sa", "")){
+        Connection connection = DriverManager.getConnection(jdbcUrl, "sa", "");
         PreparedStatement statement =
                 connection.prepareStatement("select * from PULL_REQUESTS where number > ?");
         statement.setInt(1, 0);
@@ -21,9 +24,6 @@ public class DatabaseReader {
                             + resultSet.getString(2)
                             + " "
                             + resultSet.getString(2));
-        }
-        } catch (SQLException e) {
-            throw new RuntimeException();
         }
     }
 }
