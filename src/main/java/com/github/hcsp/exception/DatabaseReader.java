@@ -23,7 +23,6 @@ public class DatabaseReader {
                                 + resultSet.getString(2)
                                 + " "
                                 + resultSet.getString(2));
-
             }
         }
     }
