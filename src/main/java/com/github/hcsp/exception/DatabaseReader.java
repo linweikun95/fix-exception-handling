@@ -10,6 +10,7 @@ public class DatabaseReader {
         System.out.println(jdbcUrl);
         Connection connection = DriverManager.getConnection(jdbcUrl, "sa", "");
         PreparedStatement statement = connection.prepareStatement("select * from PULL_REQUESTS where number > ?");
+
         try {
             statement.setInt(1, 0);
             ResultSet resultSet = statement.executeQuery();
