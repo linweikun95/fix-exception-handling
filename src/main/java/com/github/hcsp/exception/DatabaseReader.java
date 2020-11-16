@@ -14,8 +14,7 @@ public class DatabaseReader {
         System.out.println(jdbcUrl);
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, "sa", "");
-             PreparedStatement statement = connection.prepareStatement("select * from PULL_REQUESTS where number > ?"))
-        {
+             PreparedStatement statement = connection.prepareStatement("select * from PULL_REQUESTS where number > ?")) {
             statement.setInt(1, 0);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
